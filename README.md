@@ -3,7 +3,7 @@ LensLok cracker
 
 This is based on LensKey by Simon Owen (https://simonowen.com/spectrum/lenskey/)
 
-Updated to be OS independant using the SDL2 library.
+Updated to be OS independent using the SDL2 library.
 
 ## Usage
 
