@@ -26,3 +26,6 @@ Use the index number of the game, not the name.
 IMAGE is the saved and pre-cropped screenshot you have of the LensLok code. Crop the green part shown in the image below and as precisely as shown.
 
 ![GitHub Logo](/images/ok-highlight.png)
+
+## Disclaimer
+This has only been tested with Elite. I do not have the other games to test with.
