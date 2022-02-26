@@ -26,9 +26,9 @@ Use the index number of the game, not the name.
 IMAGE is the saved screenshot you have of the Lenslok code.
 
 1. Move the image within the window using the mouse and place the Lenslok code at the top-left corner.
-2. Reduce the size of the window to enclose just the Lenslok code.
+2. Reduce the size of the window to enclose just the right hand side of the Lenslok code.
 3. Press ENTER to reveal the code.
-4. If the code is not right, adjust the image position and/or window size. Then repeat step 3.
+4. If the code is not right, adjust the window size right or left. Then repeat step 3.
 
 LensKey will save a configuration file for each of the games to start the window size and image position to ease future loading.
 
