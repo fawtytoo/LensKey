@@ -1,7 +1,7 @@
 # LensKey
-LensLok cracker
+Lenslok cracker
 
-This is based on LensKey by Simon Owen (https://simonowen.com/spectrum/lenskey/)
+This is based on Lenskey by Simon Owen (https://simonowen.com/spectrum/lenskey/)
 
 Updated to be OS independent using the SDL2 library.
 
@@ -23,9 +23,14 @@ GAME is one of 9:
 
 Use the index number of the game, not the name.
 
-IMAGE is the saved and pre-cropped screenshot you have of the LensLok code. Crop the green part shown in the image below and as precisely as shown.
+IMAGE is the saved screenshot you have of the Lenslok code.
 
-![GitHub Logo](/images/ok-highlight.png)
+1. Move the image within the window using the mouse and place the Lenslok code at the top-left corner.
+2. Reduce the size of the window to enclose just the Lenslok code.
+3. Press ENTER to reveal the code.
+4. If the code is not right, adjust the image position and/or window size. Then repeat step 3.
+
+LensKey will save a configuration file for each of the games to stort the window size and image position to ease future loading.
 
 ## Disclaimer
 This has only been tested with Elite. I do not have the other games to test with.
