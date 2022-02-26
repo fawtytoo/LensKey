@@ -168,7 +168,7 @@ int main(int argc, char **argv)
                     for (i = 0; i < 16; i++)
                         if (lenskey_Game[game].decode[i])
                         {
-                            rectSrc.x = rectImage.x + (window_W / 2) + (window_W / 2) * lenskey_Game[game].decode[i] / 100;
+                            rectSrc.x = rectImage.x + window_W * lenskey_Game[game].decode[i] / 100;
                             rectDest.x = i * 8;
                             SDL_BlitScaled(image, &rectSrc, result, &rectDest);
                         }
