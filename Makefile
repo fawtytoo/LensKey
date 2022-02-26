@@ -7,7 +7,7 @@ CC = gcc
 CFLAGS = -O -Wall -Wextra
 LDFLAGS = -lSDL2 -lSDL2_image
 
-SOURCE = main.o
+SOURCE = main.o ini.o
 
 all:	$(SOURCE)
 	$(CC) $(SOURCE) -o $(TARGET) $(LDFLAGS)
