@@ -3,7 +3,7 @@ Lenslok cracker
 
 This is based on Lenskey by Simon Owen (https://simonowen.com/spectrum/lenskey/)
 
-Updated to be OS independent using the SDL2 library.
+Created to be OS independent using the SDL2 library.
 
 ## Usage
 
@@ -30,7 +30,7 @@ IMAGE is the saved screenshot you have of the Lenslok code.
 3. Press ENTER to reveal the code.
 4. If the code is not right, adjust the image position and/or window size. Then repeat step 3.
 
-LensKey will save a configuration file for each of the games to stort the window size and image position to ease future loading.
+LensKey will save a configuration file for each of the games to start the window size and image position to ease future loading.
 
 ## Disclaimer
-This has only been tested with Elite. I do not have the other games to test with.
+This has only been tested with Elite and Art Studio, due to lack of screenshot examples.
