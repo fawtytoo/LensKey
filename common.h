@@ -5,7 +5,7 @@
 
 int Cfg_GetInteger(char *, char *, int);
 void Cfg_Close(void);
-int Cfg_Open(char*);
+int Cfg_Open(char *, int);
 
 #endif
 

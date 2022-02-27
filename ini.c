@@ -3,7 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
-#include <sys/stat.h>
 
 typedef struct
 {
@@ -12,9 +11,6 @@ typedef struct
     int         lines;
 } SECTION;
 
-typedef struct stat     STATUS;
-
-char        *buffer = NULL;
 SECTION     *section = NULL;
 int         count = 0;
 
@@ -56,39 +52,34 @@ char *getValuePos(char *pos, char *key)
     return pos;
 }
 
-int Cfg_Open(char *file)
+int Cfg_Open(char *buffer, int length)
 {
-    FILE        *handle;
-    STATUS      status;
-    char        *posOld, *posNew;
+    char        *pos, *end;
 
-    if (stat(file, &status) < 0)
-        return 1;
+    end = buffer + length - 1;
 
-    if (!(handle = fopen(file, "rb")))
-        return 1;
-
-    posOld = buffer = malloc(status.st_size);
-    fread(buffer, 1, status.st_size, handle);
-    fclose(handle);
-
-    while ((posNew = strchr(posOld, '\n')))
+    do
     {
-        *posNew = 0;
-        if (*posOld == '[' && *(posNew - 1) == ']')
+        if ((pos = strchr(buffer, '\n')))
+            *pos = 0;
+        else
+            pos = buffer + length - 1;
+
+        if (*buffer == '[' && *(pos - 1) == ']')
         {
-            *(posNew - 1) = 0;
+            *(pos - 1) = 0;
             count++;
             section = realloc(section, sizeof(SECTION) * count);
-            section[count - 1].start = posNew + 1;
-            section[count - 1].name = posOld + 1;
+            section[count - 1].start = pos + 1;
+            section[count - 1].name = buffer + 1;
             section[count - 1].lines = 0;
         }
         else if (count)
             section[count - 1].lines++;
 
-        posOld = posNew + 1;
-    }
+        buffer = pos + 1;
+    } while (buffer < end);
+
     if (count == 0)
         return 1;
 
@@ -99,9 +90,6 @@ void Cfg_Close(void)
 {
     if (section)
         free(section);
-
-    if (buffer)
-        free(buffer);
 }
 
 char *getValue(char *cat, char *key)

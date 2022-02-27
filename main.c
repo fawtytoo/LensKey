@@ -11,10 +11,14 @@
 #include <SDL2/SDL.h>
 #include <SDL2/SDL_image.h>
 
+#include <sys/stat.h>
+
 #include "common.h"
 
 #define SAVECAT(cat)        fprintf(file, "[%s]", cat)
 #define SAVEINT(key, value) fprintf(file, "\n%s = %i", key, value)
+
+typedef struct stat     STATUS;
 
 typedef struct
 {
@@ -37,12 +41,39 @@ GAME        lenskey_Game[9] =
     {"TT Racer", 0, 0, 0, 0, {0, -20, -41, -69, -53,   6, -29, 0,  0,  -9,  64, 20,  46, 33, 81, 0}}
 };
 
-void LoadConfig(int game)
+void LoadConfig(char *config)
 {
-    lenskey_Game[game].x = Cfg_GetInteger(lenskey_Game[game].name, "Left", 0);
-    lenskey_Game[game].y = Cfg_GetInteger(lenskey_Game[game].name, "Top", 0);
-    lenskey_Game[game].w = Cfg_GetInteger(lenskey_Game[game].name, "Width", 0);
-    lenskey_Game[game].h = Cfg_GetInteger(lenskey_Game[game].name, "Height", 0);
+    FILE        *file;
+    STATUS      status;
+    char        *buffer;
+    int         game;
+
+    if (stat(config, &status) < 0)
+        return;
+
+    if (!(file = fopen(config, "rb")))
+        return;
+
+    if ((buffer = malloc(status.st_size)) == NULL)
+        return;
+
+    fread(buffer, 1, status.st_size, file);
+    fclose(file);
+
+    if (Cfg_Open(buffer, status.st_size) == 0)
+    {
+        for (game = 0; game < 9; game++)
+        {
+            lenskey_Game[game].x = Cfg_GetInteger(lenskey_Game[game].name, "Left", 0);
+            lenskey_Game[game].y = Cfg_GetInteger(lenskey_Game[game].name, "Top", 0);
+            lenskey_Game[game].w = Cfg_GetInteger(lenskey_Game[game].name, "Width", 0);
+            lenskey_Game[game].h = Cfg_GetInteger(lenskey_Game[game].name, "Height", 0);
+        }
+
+        Cfg_Close();
+    }
+
+    free(buffer);
 }
 
 void SaveConfig(char *config)
@@ -111,13 +142,7 @@ int main(int argc, char **argv)
 
     sprintf(config, "%s/.lenskey", getenv("HOME"));
 
-    if (Cfg_Open(config) == 0)
-    {
-        for (i = 0; i < 9; i++)
-            LoadConfig(i);
-
-        Cfg_Close();
-    }
+    LoadConfig(config);
 
     if (lenskey_Game[game].w == 0 || lenskey_Game[game].h == 0)
     {
