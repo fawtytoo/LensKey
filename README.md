@@ -1,5 +1,5 @@
 # LensKey
-Lenslok cracker
+Lenslok cracker for Sinclair ZX Spectrum games using Lenslok copy protection.
 
 This is based on Lenskey by Simon Owen (https://simonowen.com/spectrum/lenskey/)
 
@@ -33,4 +33,6 @@ IMAGE is the saved screenshot you have of the Lenslok code.
 LensKey will save a configuration file for the games to remember the last window size and image position to ease future loading.
 
 ## Disclaimer
+LensKey only works with Lenslok codes generated from Sinclair ZX Spectrum games.
+
 This has only been tested with Elite and Art Studio, due to lack of screenshot examples.
